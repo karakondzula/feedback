@@ -15,7 +15,7 @@ Comment::
 <div class="page-header">
 	<h3>Comment</h3>
 </div>
-<form method="post" action="">
+<form method="post" action=" {{route('addfeed')}} ">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 	<input type="hidden" name="pid" value="{{ $project->id }}" />

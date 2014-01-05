@@ -9,8 +9,10 @@ Route::get('show', array('as'=>'show','uses'=>'ProjectController@getShowProjects
 //feedback routes
 Route::get('addfeed', array('as'=>'addfeed','uses'=>'FeedbackController@getAddFeedback'));
 Route::post('addfeed', 'FeedbackController@postAddFeedback');
-
+//reastful example: Route::controller('ask', 'QuestionsController');
 Route::get('feedback/{id}','FeedbackController@getComment');
+Route::get('judge/feedback','FeedbackController@getShowNewComments');
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes

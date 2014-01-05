@@ -11,7 +11,7 @@ class FeedbackController extends BaseController {
 			->with('project',Project::find($id));
 	}
 
-	public function postAddFeedback($id){
+	public function postAddFeedback(){
 		// Declare the rules for the form validation
 		$rules = array(
 			'name'    => 'required',
@@ -24,7 +24,7 @@ class FeedbackController extends BaseController {
 		// If validation fails, we'll exit the operation now.
 		if ($validator->fails())
 		{
-			return Redirect::route('feedback/'.$id)->withErrors($validator);
+			return Redirect::to('feedback/'.Input::get('pid'))->withErrors($validator);
 		}
 
 		
@@ -35,8 +35,19 @@ class FeedbackController extends BaseController {
 			'approved'=>0
 			));
 
-		echo "Komentar je prihvaćen";
+		echo "Accepted";
 		//return View::make('feedbacks');
+	}
+
+	public function getShowNewComments(){
+		if ( ! Sentry::check())
+		{
+			return Redirect::to("auth/signin")->with('error', 'You need to be logged in!');
+		}
+
+		$data = Feedback::where('user_id','=',Sentry::getUser()->id);
+
+		return View::make('feedbacks/judge')->with('feeds',$data);
 	}
 
 }
