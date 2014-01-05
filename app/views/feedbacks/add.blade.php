@@ -10,7 +10,7 @@ Comment::
 	<h3>{{$project->name}}</h3>
 </div>
 <div>
-	<p>{{$project->descritption}}</p>
+	<p>{{$project->description}}</p>
 </div>
 <div class="page-header">
 	<h3>Comment</h3>

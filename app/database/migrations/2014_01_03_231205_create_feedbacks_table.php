@@ -11,7 +11,7 @@ class CreateFeedbacksTable extends Migration {
 		{
 			$table->increments('id')->unsigned();
 			$table->integer('project_id')->unsigned();
-			$table->integer('approved')->unsigned();	//0 - not answerd, 1 - approved, denied
+			$table->integer('approved')->unsigned();	//0 - not answerd, 1 - approved, 2 - denied
 			$table->string('visitor');
 			$table->text('feedback');
 

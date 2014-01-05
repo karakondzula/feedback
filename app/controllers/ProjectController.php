@@ -48,7 +48,7 @@ class ProjectController extends BaseController {
 			'description'=>Input::get('description')
 			));
 
-		return View::make('projects/add');
+		return Redirect::route('add')->with('success','Project submitted');
 	}
 
 }

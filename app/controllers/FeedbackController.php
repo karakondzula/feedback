@@ -35,8 +35,7 @@ class FeedbackController extends BaseController {
 			'approved'=>0
 			));
 
-		echo "Accepted";
-		//return View::make('feedbacks');
+		return Redirect::to('feedback/'.Input::get('pid'))->with('success','Comment submitted');
 	}
 
 	public function getShowNewComments(){
@@ -45,9 +44,16 @@ class FeedbackController extends BaseController {
 			return Redirect::to("auth/signin")->with('error', 'You need to be logged in!');
 		}
 
-		$data = Feedback::where('user_id','=',Sentry::getUser()->id);
 
-		return View::make('feedbacks/judge')->with('feeds',$data);
+		$users_projects = Project::where('user_id','=',Sentry::getUser()->id)->get();
+		
+		$all_feeds = new Illuminate\Database\Eloquent\Collection;
+		foreach ($users_projects as $project) {
+			$feeds = Feedback::where('project_id','=',$project->id)->get();
+			$all_feeds = $all_feeds->merge($feeds);
+		}
+
+		return View::make('feedbacks/judge')->with('feeds',$all_feeds);
 	}
 
 }
